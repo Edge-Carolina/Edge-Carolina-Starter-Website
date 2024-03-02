@@ -1,4 +1,4 @@
-nav {
+.navbar {
     padding: 10px;
     position: fixed;
     width: 100%;
@@ -8,25 +8,18 @@ nav {
     background: rgba(0, 0, 0, 0.529); /* Semi-transparent background */
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
-
 .nav-container {
     width: 100%;
     max-width: 1200px; /* Adjust max-width as needed */
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end; /* Aligns items to the right */
+    margin-right: 20px; /* Adjust the right margin as needed */
+    height: 60px;
 }
 
-/* Logo styles */
-.logo {
-    height: 60px; /* Adjust size as needed */
-    margin-right: 20px; /* Creates space between logo and nav items */
-    transform: translateX(-100px);
-}
-
-/* Style for the navigation links */
-nav a {
+.button {
     color: #fff;
     text-transform: uppercase;
     text-decoration: none;
@@ -38,17 +31,27 @@ nav a {
     border: 1px solid transparent; /* Adds a transparent border */
     border-radius: 10px; /* Slightly rounded corners for aesthetic */
     height: 100%;
+    margin-top: 40px; /* Adjust top margin to align with the logo */
+    margin-left: 10px; /* Adjust space between buttons */
+}
+
+/* Hover effect for links */
+.button:hover {
+    color: #3be3d2; /* Color for hover state */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.logo {
+    height: 70px; /* Adjust the height as needed */
+    width: auto; /* Adjust the width as needed to maintain aspect ratio */
+    margin-right: 20px; /* Creates space between logo and nav items */
+    transform: translateX(-1025px) translateY(-33px);
+    position: fixed;
+    
 }
 
 /* Hover effect for links */
 nav a:hover {
     color: #3be3d2; /* Color for hover state */
     transform: translateY(-2px); /* Slight lift effect on hover */
-}
-
-.logo {
-    margin-right: auto; /* Pushes the logo to the left */
-    font-size: 24px; /* Larger font size for the logo */
-    text-transform: uppercase;
-    text-decoration: none;
 }
