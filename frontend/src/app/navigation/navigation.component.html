@@ -1,12 +1,25 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <img
-      src="assets/edge-carolina-logo.png"
-      alt="Edge Carolina Logo"
-      class="logo"
-    />
-    <a routerLink="/">Home</a>
-    <a routerLink="/about">About</a>
-    <a routerLink="/contact">Products</a>
-  </div>
-</nav>
+<!-- Root Application Component -->
+<div class="app-container">
+  <!-- Navigation Sidebar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <img
+        src="assets/edge-carolina-logo.png"
+        alt="Edge Carolina Logo"
+        class="logo"
+      />
+      <a routerLink="/">Home</a>
+      <a routerLink="/about">About</a>
+      <a routerLink="/contact">Products</a>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main
+    role="main"
+    class="main"
+    [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''"
+  >
+    <router-outlet #outlet="outlet"></router-outlet>
+  </main>
+</div>

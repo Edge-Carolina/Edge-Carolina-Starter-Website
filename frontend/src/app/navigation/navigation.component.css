@@ -1,13 +1,17 @@
 nav {
     padding: 10px;
     position: fixed;
+    top: 0; /* Ensures it's always at the top */
+    left: 0; /* Aligns to the left */
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distributes space between and around content */
-    background: rgba(0, 0, 0, 0.529); /* Semi-transparent background */
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.529);
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    z-index: 1050; /* Make sure this is higher than the z-index of animated elements */
 }
+
 
 .nav-container {
     width: 100%;
@@ -52,3 +56,12 @@ nav a:hover {
     text-transform: uppercase;
     text-decoration: none;
 }
+
+.main {
+    position: relative;
+    min-height: 100vh;
+    background-color: #000000;
+}
+
+
+  

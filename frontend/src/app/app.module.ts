@@ -15,7 +15,7 @@ import { MatListModule } from "@angular/material/list";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from "./navigation/navigation.component";
 
 @NgModule({
   declarations: [
