@@ -5,10 +5,9 @@ import {
   style,
   query,
 } from "@angular/animations";
-
 export const fadeAnimation = trigger("fadeAnimation", [
   transition("* => *", [
-    query(":enter, :leave", [style({ position: "fixed", width: "100%" })], {
+    query(":enter, :leave", [style({ position: "absolute", width: "100%" })], {
       optional: true,
     }),
     query(":enter", [style({ opacity: 0 })], { optional: true }),

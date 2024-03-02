@@ -13,15 +13,6 @@ export class HomeComponent {
   };
   constructor(private router: Router) {}
 
-  /* playZoomVideo() {
-    const video = document.getElementById("zoomVideo") as HTMLVideoElement;
-    video.style.display = "block";
-    video.play();
-  }
-  public videoEnded() {
-    this.router.navigate(["/about"]);
-  } */
-
   navigateToAbout() {
     this.router.navigate(["/about"]);
   }

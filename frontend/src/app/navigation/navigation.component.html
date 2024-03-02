@@ -1,17 +1,15 @@
-<!-- Root Application Component -->
 <div class="app-container">
   <!-- Navigation Sidebar -->
   <nav class="navbar">
-    <div class="nav-container">
-      <img
-        src="assets/edge-carolina-logo.png"
-        alt="Edge Carolina Logo"
-        class="logo"
-      />
-      <a class="button" routerLink="/">Home</a>
-      <a class="button" routerLink="/about">About</a>
-      <a class="button" routerLink="/contact">Products</a>
-    </div>
+    <img
+      [routerLink]="'/'"
+      src="assets/edge-carolina-logo.png"
+      alt="Edge Carolina Logo"
+      class="logo"
+    />
+    <a class="button" [routerLink]="'/'">Home</a>
+    <a class="button" [routerLink]="'/about'">About</a>
+    <a class="button" [routerLink]="'/contact'">Products</a>
   </nav>
 
   <!-- Main Content Area -->

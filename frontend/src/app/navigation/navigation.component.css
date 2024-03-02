@@ -1,44 +1,35 @@
 .navbar {
     padding: 10px;
     position: fixed;
-    top: 0; /* Ensures it's always at the top */
-    left: 0; /* Aligns to the left */
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(0, 0, 0, 0.529);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-    z-index: 1050; /* Make sure this is higher than the z-index of animated elements */
+    background: linear-gradient(
+        to right,
+        #011b22bb, /* Start with transparent black */
+        #000000a1 /* End with semi-transparent black */
+      ) ;    
+    z-index: 1050;
+    height: 50px;
+    margin-left: auto;
+    backdrop-filter: blur(15px); /* Apply the blur effect */
 }
 
-
-.nav-container {
-    width: 100%;
-    max-width: 1200px; /* Adjust max-width as needed */
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Aligns items to the right */
-    margin-right: 20px; /* Adjust the right margin as needed */
-    height: 60px;
-}
 
 .button {
     color: #fff;
     text-transform: uppercase;
     text-decoration: none;
-    font-size: 18px; /* Increased font size for better readability */
+    font-size: 18px;
     font-family: 'Arial', sans-serif;
     letter-spacing: 1px;
-    padding: 10px 20px; /* Increased padding for larger clickable area */
+    padding: 10px 25px;
     transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    border: 1px solid transparent; /* Adds a transparent border */
-    border-radius: 10px; /* Slightly rounded corners for aesthetic */
-    height: 100%;
-    margin-top: 40px; /* Adjust top margin to align with the logo */
-    margin-left: 10px; /* Adjust space between buttons */
+    border: 1px solid transparent;
+    text-align: right;
 }
+
 
 /* Hover effect for links */
 .button:hover {
@@ -47,20 +38,14 @@
 }
 
 /* Hover effect for links */
-nav a:hover {
-    color: #3be3d2; /* Color for hover state */
+.logo:hover {
     transform: translateY(-2px); /* Slight lift effect on hover */
+    cursor: pointer;
 }
 
 .logo {
     margin-right: auto; /* Pushes the logo to the left */
-    font-size: 24px; /* Larger font size for the logo */
-    text-transform: uppercase;
-    text-decoration: none;
-    height: 75px; /* Adjust the height as needed */
-    margin-right: 20px; /* Creates space between logo and nav items */
-    transform: translateX(-1325px) translateY(2px);
-    position: fixed;
+    height: 60px; /* Adjust the height as needed */
 }
 
 .main {
@@ -68,6 +53,3 @@ nav a:hover {
     min-height: 100vh;
     background-color: #000000;
 }
-
-
-  
