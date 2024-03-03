@@ -106,6 +106,4 @@ COPY backend/requirements.txt /workspace/backend/requirements.txt
 WORKDIR /workspace/backend
 RUN python3 -m pip install -r requirements.txt
 
-
-# Expose server ports
 EXPOSE 1460 1461 1462

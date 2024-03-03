@@ -25,25 +25,21 @@ export class JoinService {
 
   /** Returns a single user from the API as an observable.  */
   getUser(id: number): Observable<UserData> {
-    return this.http
-      .get<UserData>("/api/productivity/" + id);
+    return this.http.get<UserData>("/api/productivity/" + id);
   }
 
   /** Creates a new user and returns the created user from the API as an observable. */
   createUser(request: UserData): Observable<UserData> {
-    return this.http
-      .post<UserData>("/api/productivity", request)
+    return this.http.post<UserData>("/api/productivity", request);
   }
 
   /** Edits a user and returns the edited user from the API as an observable. */
   editUser(request: UserData): Observable<UserData> {
-    return this.http
-      .put<UserData>("/api/productivity", request)
+    return this.http.put<UserData>("/api/productivity", request);
   }
 
   /** Deletes a user and returns the delete action as an observable. */
   deleteUser(id: number) {
     return this.http.delete("/api/productivity/" + id);
   }
-
 }

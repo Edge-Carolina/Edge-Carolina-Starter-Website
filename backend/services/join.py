@@ -4,15 +4,14 @@ The Productivity Service allows the API to manipulate user data in the database.
 
 from fastapi import Depends
 from sqlalchemy.orm import Session
-from backend.database import db_session
-from backend.entities.user_entity import UserEntity
+from ..database import db_session
+from ..entities.user_entity import UserEntity
 
-from backend.models.user_data import User
-from backend.services.exceptions import (
+from ..models.user_data import UserData
+from ..services.exceptions import (
     ResourceNotFoundException,
     UserPermissionException,
 )
-from ..models.user_data import UserData
 
 __authors__ = ["Weston Voglesonger"]
 __copyright__ = "Copyright 2024"

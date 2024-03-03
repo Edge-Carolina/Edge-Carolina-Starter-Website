@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { JoinService } from "./join.service";
+import { UserData } from "./userdata";
 
 @Component({
   selector: "app-join",
@@ -14,7 +16,10 @@ export class JoinComponent implements OnInit {
 
   joinForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    public joinService: JoinService,
+  ) {}
 
   ngOnInit(): void {
     this.joinForm = this.fb.group({
@@ -29,7 +34,23 @@ export class JoinComponent implements OnInit {
   onSubmit(): void {
     if (this.joinForm.valid) {
       console.log("Form Submitted:", this.joinForm.value);
-      // Here you can handle the form submission, such as sending the data to a server
+      this.joinService
+        .createUser({
+          id: 0,
+          first_name: this.joinForm.value.firstName,
+          last_name: this.joinForm.value.lastName,
+          major: this.joinForm.value.major,
+          email: this.joinForm.value.email,
+        })
+        .subscribe((user: UserData) => {
+          alert("User created:");
+        });
     }
+  }
+
+  getFirstName() {
+    this.joinService.getUser(0).subscribe((user: UserData) => {
+      alert(user.first_name);
+    });
   }
 }
