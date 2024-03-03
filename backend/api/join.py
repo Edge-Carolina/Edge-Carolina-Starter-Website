@@ -19,7 +19,7 @@ openapi_tags = {
 # Gets all users.
 # Expected return type: list[UserData]
 @api.get("", response_model=list[UserData], tags=["Join"])
-def get_timers(
+def get_users(
     join_service: JoinService = Depends(),
 ) -> list[UserData]:
     """
@@ -33,14 +33,14 @@ def get_timers(
     """
 
     # Return all users
-    return join_service.get_timers()
+    return join_service.get_users()
 
 
 # GET /api/join/{id}
 # Get a user by its ID.
 # Expected return type: UserData
 @api.get("/{id}", response_model=UserData, tags=["Join"])
-def get_timer(
+def get_user(
     id: int,
     join_service: JoinService = Depends(),
 ) -> UserData:
@@ -52,14 +52,14 @@ def get_timer(
         join_service: a valid JoinService
     """
 
-    return join_service.get_timer(id)
+    return join_service.get_user(id)
 
 
 # POST /api/join/
 # Creates a new user.
 # Expected return type: UserData
 @api.post("", response_model=UserData, tags=["Join"])
-def create_timer(
+def create_user(
     user: UserData,
     join_service: JoinService = Depends(),
 ) -> UserData:
@@ -74,14 +74,14 @@ def create_timer(
         User: Created user
     """
 
-    return join_service.create_timer(user)
+    return join_service.create_user(user)
 
 
 # PUT /api/join
 # Updates a user.
 # Expected return type: UserData
 @api.put("", response_model=UserData, tags=["Join"])
-def update_timer(
+def update_user(
     user: UserData,
     join_service: JoinService = Depends(),
 ) -> UserData:
@@ -96,14 +96,14 @@ def update_timer(
         UserData: Updated user
     """
 
-    return join_service.update_timer(user)
+    return join_service.update_user(user)
 
 
 # DELETE /api/productivity/{id}
 # Deletes a user.
 # Expected return type: UserData
 @api.delete("/{id}", response_model=None, tags=["Join"])
-def delete_timer(
+def delete_user(
     id: int,
     join_service: JoinService = Depends(),
 ) -> UserData:
@@ -115,4 +115,4 @@ def delete_timer(
         join_service: a valid JoinService
     """
 
-    return join_service.delete_timer(id)
+    return join_service.delete_user(id)

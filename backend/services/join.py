@@ -1,9 +1,9 @@
 """
-The Productivity Service allows the API to manipulate pomodoro timer data in the database.
+The Productivity Service allows the API to manipulate user data in the database.
 """
 
 from fastapi import Depends
-from pytest import Session
+from sqlalchemy.orm import Session
 from backend.database import db_session
 from backend.entities.user_entity import UserEntity
 
@@ -29,23 +29,21 @@ class JoinService:
         """Initializes the `JoinService` session"""
         self._session = session
 
-    def get_timers(self) -> list[UserData]:
+    def get_users(self) -> list[UserData]:
         """
         Retrieves all users.
 
         Returns:
             list[UserData]: All user data for the currently logged in user.
         """
-        # TODO: Query the PomodoroTimer table to retrieve the entries associated with the current user.
+        query_result = self._session.query(UserEntity).all()
+        return [user_entity.to_model() for user_entity in query_result]
 
-        # TODO: Return all the PomodoroTimer entities for the user in the correct format.
-        return ...
-
-    def get_timer(self, user_id: int) -> UserData:
-        """Gets one timer by an ID.
+    def get_user(self, user_id: int) -> UserData:
+        """Gets one user  by an ID.
 
         Args:
-            user_id: Timer to retrieve.
+            user_id: user  to retrieve.
         Returns:
             UserData: User with the matching ID.
         Raises:
@@ -53,18 +51,13 @@ class JoinService:
                 they did not create.
             ResourceNotFoundException: user does not exist.
         """
-        # TODO: Query the PomodoroTimer table to retrieve the timer with the matching id
+        user_entity = self.get_user_by_id(user_id)
+        return user_entity.to_model()          
+    
+        # TODO: Ensure that the user attempting to retrieve the user is the same as the user
+        # who created the user. Raise an exception otherwise.
 
-        # TODO: Add error handling if there is no timer associated with the given id.
-        # Check if result is null and raise the custom ResourceNotFoundException
-
-        # TODO: Ensure that the user attempting to retrieve the timer is the same as the user
-        # who created the timer. Raise an exception otherwise.
-
-        # TODO: Return the timer if it exists
-        return ...
-
-    def create_timer(self, user: UserData) -> UserData:
+    def create_user(self, user: UserData) -> UserData:
         """Stores a user in the database.
 
         Args:
@@ -72,41 +65,39 @@ class JoinService:
         Returns:
             UserData: Created user.
         """
-        # Set timer id to none if an id was passed in
+        # Set user id to none if an id was passed in
         if user.id is not None:
             user.id = None
 
-        # TODO: Create a new timer entity for the table.
+        newUser = UserEntity.from_model(user)
+        self._session.add(newUser)
+        self._session.commit()
+        return newUser.to_model()
 
-        # TODO: Return the new pomodoro timer object.
-        return ...
-
-    def update_timer(self, user: UserData) -> UserData:
+    def update_user(self, user: UserData) -> UserData:
         """Modifies one user in the database.
 
         Args:
             user: Data for a user with modified values.
         Returns:
-            User: Updated user.
+            UserData: Updated user.
         Raises:
-            UserPermissionException: Attempting to update a user that
-                they did not create.
             ResourceNotFoundException: User does not exist.
         """
-        # TODO: Query the table for the pomodoro with the matching id
+        user_entity = self.get_user_by_id(user.id)
+        user_entity.first_name = user.first_name
+        user_entity.last_name = user.last_name
+        user_entity.email = user.email
+        user_entity.major = user.major
+        self._session.commit()
+        return user_entity.to_model()
 
-        # TODO: Throw the custom ResourceNotFoundException if the user tries to edit a timer
-        # that does not exist.
+        # TODO: Ensure that the user attempting to update the user is the same as the user
+        # who created the user. Raise an exception otherwise.
 
-        # TODO: Ensure that the user attempting to update the timer is the same as the user
-        # who created the timer. Raise an exception otherwise.
+    
 
-        # TODO: Update each field of the pomodoro timer object to match the fields of the given timer.
-
-        # TODO: Return the updated pomodoro timer object
-        return ...
-
-    def delete_timer(self, user_id: int) -> None:
+    def delete_user(self, user_id: int) -> None:
         """Deletes one user from the database.
 
         Args:
@@ -116,14 +107,25 @@ class JoinService:
                 they did not create.
             ResourceNotFoundException: User does not exist.
         """
-        # TODO: Query the table for the pomodoro with the matching id
+        # TODO: Query the table for the user with the matching id
+        query = self.get_user_by_id(user_id)
+        self._session.delete(query)
+        self._session.commit()    
+        
+        # TODO: Ensure that the user attempting to delete the user is the same as the user
+        # who created the user. Raise an exception otherwise.
 
-        # TODO: Throw the custom ResourceNotFoundException if the user tries to delete a timer
-        # that does not exist.
+    def get_user_by_id(self, user_id: int) -> UserEntity:
+        """Gets one user by an ID.
 
-        # TODO: Ensure that the user attempting to delete the timer is the same as the user
-        # who created the timer. Raise an exception otherwise.
-
-        # TODO: Delete the pomodoro entity from the table/session.
-
-        # TODO: Commit the changes to the table/session.
+        Args:
+            user_id: ID of the user to get
+        Returns:
+            User: User with the matching ID.
+        Raises:
+            ResourceNotFoundException: User does not exist.
+        """
+        query = self._session.get(UserEntity, user_id)
+        if query is None:
+            raise ResourceNotFoundException("User does not exist.")
+        return query 

@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Self
 
-from backend.models.user_data import User
+from  backend.models.user_data import UserData
 from .entity_base import EntityBase
 
 __authors__ = ["Weston Voglesonger"]
@@ -12,7 +12,7 @@ __license__ = "MIT"
 
 
 class UserEntity(EntityBase):
-    """Serves as the database model schema defining the shape of the `User` table"""
+    """Serves as the database model schema defining the shape of the `UserData` table"""
 
     __tablename__ = "user"
     __table_args__ = (
@@ -29,12 +29,12 @@ class UserEntity(EntityBase):
     # posts = relationship("PostEntity", back_populates="user")
 
     @classmethod
-    def from_model(cls, model: User) -> Self:
+    def from_model(cls, model: UserData) -> Self:
         """
-        Create a UserEntity from a User model.
+        Create a UserEntity from a UserData model.
 
         Args:
-            model (User): The model to create the entity from.
+            model (UserData): The model to create the entity from.
 
         Returns:
             Self: The entity (not yet persisted).
@@ -47,14 +47,14 @@ class UserEntity(EntityBase):
             major=model.major,
         )
 
-    def to_model(self) -> User:
+    def to_model(self) -> UserData:
         """
-        Create a User model from a UserEntity.
+        Create a UserData model from a UserEntity.
 
         Returns:
-            User: A User model for API usage.
+            User: A UserData model for API usage.
         """
-        return User(
+        return UserData(
             id=self.id,
             first_name=self.first_name,
             last_name=self.last_name,
