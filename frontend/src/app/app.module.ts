@@ -2,7 +2,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
-import { AppRoutingModule } from "./app-routing.module"; // Import AppRoutingModule
+import { AppRoutingModule } from "./app-routing.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 // Angular Material Components
 import { MatButtonModule } from "@angular/material/button";
@@ -16,6 +17,7 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { NavigationComponent } from "./navigation/navigation.component";
+import { JoinComponent } from "./join/join.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { NavigationComponent } from "./navigation/navigation.component";
     HomeComponent,
     AboutComponent,
     NavigationComponent,
+    JoinComponent,
     // Add other component declarations here
   ],
   imports: [
@@ -30,6 +33,7 @@ import { NavigationComponent } from "./navigation/navigation.component";
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
 
     // Angular Material Modules
     MatButtonModule,

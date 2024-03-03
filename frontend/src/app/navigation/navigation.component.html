@@ -7,9 +7,18 @@
       alt="Edge Carolina Logo"
       class="logo"
     />
-    <a class="button" [routerLink]="'/'">Home</a>
-    <a class="button" [routerLink]="'/about'">About</a>
-    <a class="button" [routerLink]="'/contact'">Products</a>
+    <div class="button-container">
+      <a class="button" [routerLink]="'/'">Home</a>
+      <a class="button" [routerLink]="'/about'">About</a>
+      <a class="button" [routerLink]="'/contact'">Products</a>
+      <div class="dropdown">
+        <a class="button">More</a>
+        <div class="dropdown-content">
+          <a [routerLink]="'/join'">Join</a>
+          <!-- Add more links here as needed -->
+        </div>
+      </div>
+    </div>
   </nav>
 
   <!-- Main Content Area -->

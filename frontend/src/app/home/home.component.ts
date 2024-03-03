@@ -16,4 +16,8 @@ export class HomeComponent {
   navigateToAbout() {
     this.router.navigate(["/about"]);
   }
+
+  navigateToJoin() {
+    this.router.navigate(["/join"]);
+  }
 }

@@ -16,6 +16,12 @@
     backdrop-filter: blur(15px); /* Apply the blur effect */
 }
 
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateX(-300px);
+}
 
 .button {
     color: #fff;
@@ -24,7 +30,7 @@
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     letter-spacing: 1px;
-    padding: 10px 25px;
+    padding: 10px 20px;
     transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     border: 1px solid transparent;
     text-align: right;
@@ -52,4 +58,35 @@
     position: relative;
     min-height: 100vh;
     background-color: #000000;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: translateY(24px);
+  }
+  
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+ 
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
 }
