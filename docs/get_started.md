@@ -41,6 +41,7 @@ Once the Dev Container begins, open a terminal and complete the following:
    3. It's unclear why this step is necessary, but it seems to fix issues with plugins initializing on first build of a DevContainer.
 3. Create database and reset demo data:
    1. `python3 -m backend.script.create_database`
+   2. `python3 -m backend.script.reset_demo`
 4. Start dev server processes using the `honcho` process manager
    1. `honcho start`
       1. Wait until you see "frontend.1 | Compiled successfully" emitted from the Angular dev server.
