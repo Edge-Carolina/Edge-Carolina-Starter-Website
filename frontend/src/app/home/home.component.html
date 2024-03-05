@@ -1,4 +1,6 @@
 <body>
+
+    <!-- Hero Section -->
   <img src="assets/hero.png" alt="hero" class="cover-image" />
   <div class="hero-content">
     <img class="logo" src="assets/edge-carolina-logo.png" alt="Logo" />
@@ -8,8 +10,8 @@
     <button (click)="navigateToAbout()" class="hero-button">About Us</button>
   </div>
 
-  <!-- New Mission Statement Section -->
-  <section class="mission-statement">
+  <!-- Mission-Join Section -->
+  <section class="mission-join-section">
     <div class="mission-content">
       <h2>Our Mission</h2>
       <p>
@@ -18,6 +20,12 @@
         converge to innovate and forge extraordinary products.
       </p>
     </div>
-    <button (click)="navigateToJoin()" class="join-button">Join Us</button>
+    <div class="join-content">
+      <h2>Sign Up</h2>
+      <p>If you are interested in signing up for <strong>Edge Carolina</strong> and being updated 
+        on events and important information please click the button below.</p>
+      <button (click)="navigateToJoin()" class="join-button">Join Us</button>
+    </div>
+    <img class="logo-bottom" src="assets/edge-carolina-logo.png" alt="Logo" />
   </section>
 </body>
