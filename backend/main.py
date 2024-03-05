@@ -13,7 +13,7 @@ from .api import (
 )
 
 from .services.exceptions import (
-    EventRegistrationException,
+    UserRegistrationException,
     UserPermissionException,
     ResourceNotFoundException,
 )
@@ -62,3 +62,7 @@ def resource_not_found_exception_handler(
     request: Request, e: ResourceNotFoundException
 ):
     return JSONResponse(status_code=404, content={"message": str(e)})
+
+@app.exception_handler(UserRegistrationException)
+def user_registration_exception_handler(request: Request, e: UserPermissionException):
+    return JSONResponse(status_code=405, content={"message": str(e)})

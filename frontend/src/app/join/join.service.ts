@@ -1,5 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Observable, OperatorFunction, ReplaySubject, map } from "rxjs";
+import {
+  Observable,
+  OperatorFunction,
+  ReplaySubject,
+  catchError,
+  map,
+  throwError,
+} from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { UserData } from "./userdata";
 
@@ -19,27 +26,42 @@ export class JoinService {
   /** Refreshes the internal `users$` observable with the latest user data from the API. */
   getUsers() {
     return this.http
-      .get<UserData[]>("/api/productivity")
+      .get<UserData[]>("/api/join")
       .subscribe((timers) => this.users.next(timers));
   }
 
   /** Returns a single user from the API as an observable.  */
   getUser(id: number): Observable<UserData> {
-    return this.http.get<UserData>("/api/productivity/" + id);
+    return this.http.get<UserData>("/api/join/" + id);
   }
 
   /** Creates a new user and returns the created user from the API as an observable. */
   createUser(request: UserData): Observable<UserData> {
-    return this.http.post<UserData>("/api/productivity", request);
+    return this.http.post<UserData>("/api/join", request).pipe(
+      catchError((error) => {
+        // Handle specific error status codes or messages as needed
+        if (error.status === 405) {
+          // Example: Handle UserRegistrationException
+          alert("Registration error: email is already registered.");
+        }
+        // Re-throw the error for further handling if needed
+        return throwError(() => new Error("Registration failed"));
+      }),
+    );
   }
 
   /** Edits a user and returns the edited user from the API as an observable. */
   editUser(request: UserData): Observable<UserData> {
-    return this.http.put<UserData>("/api/productivity", request);
+    return this.http.put<UserData>("/api/join", request);
   }
 
   /** Deletes a user and returns the delete action as an observable. */
   deleteUser(id: number) {
-    return this.http.delete("/api/productivity/" + id);
+    return this.http.delete("/api/join/" + id);
+  }
+
+  /** Checks if the email is already registered and returns a boolean value as an observable. */
+  checkEmailIsRegistered(email: string): Observable<boolean> {
+    return this.http.get<boolean>("/api/join", { params: { email } });
   }
 }

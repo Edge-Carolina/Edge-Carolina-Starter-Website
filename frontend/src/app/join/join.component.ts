@@ -15,6 +15,7 @@ export class JoinComponent implements OnInit {
   };
 
   joinForm!: FormGroup;
+  isEmailRegistered: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,14 +30,23 @@ export class JoinComponent implements OnInit {
       major: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
     });
+
+    this.joinForm.get("email")?.valueChanges.subscribe((value) => {
+      this.checkEmailIsRegistered(value);
+    });
+  }
+
+  checkEmailIsRegistered(email: string) {
+    this.joinService.checkEmailIsRegistered(email).subscribe((isRegistered) => {
+      this.isEmailRegistered = isRegistered;
+    });
   }
 
   onSubmit(): void {
-    if (this.joinForm.valid) {
+    if (this.joinForm.valid && !this.isEmailRegistered) {
       console.log("Form Submitted:", this.joinForm.value);
       this.joinService
         .createUser({
-          id: 0,
           first_name: this.joinForm.value.firstName,
           last_name: this.joinForm.value.lastName,
           major: this.joinForm.value.major,
@@ -46,11 +56,5 @@ export class JoinComponent implements OnInit {
           alert("User created:");
         });
     }
-  }
-
-  getFirstName() {
-    this.joinService.getUser(0).subscribe((user: UserData) => {
-      alert(user.first_name);
-    });
   }
 }

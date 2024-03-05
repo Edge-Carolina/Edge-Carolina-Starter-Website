@@ -1,108 +1,63 @@
 import pytest
-from unittest.mock import Mock, patch
-from sqlalchemy.orm import Session
+from ...services.join import JoinService
 from ...entities.user_entity import UserEntity
 from ...models.user_data import UserData
-from ...services.join import JoinService
-from ...services.exceptions import ResourceNotFoundException
-
-@pytest.fixture
-def mock_session():
-    return Mock(spec=Session)
-
-
-@patch.object(UserEntity, "from_model", return_value=Mock(spec=UserEntity))
-@patch.object(UserEntity, "to_model", return_value=Mock(spec=UserData))
-def setup_user_entity_mocks(from_model_mock: Mock, to_model_mock: Mock):
-    pass
+from ...services.exceptions import (
+    ResourceNotFoundException,
+    UserRegistrationException,
+)
+from .fixtures import join_service
+from ..user_data import fake_data_fixture
 
 
-# Run the setup function to apply the patches
-setup_user_entity_mocks()
+def test_get_users(join_service: JoinService) -> None:
+    users = join_service.get_users()
+    assert len(users) == 1  # Assuming you have only one user in your mock data
 
-
-def test_create_user(mock_session: Mock):
-    join_service = JoinService(session=mock_session)
-
-    new_user_data = UserData(
-        id=None,
-        first_name="Alice",
-        last_name="Smith",
-        email="alice@example.com",
-        major="Physics",
-    )
-    new_user_entity = UserEntity.from_model(new_user_data)
-
-    with patch.object(UserEntity, "from_model", return_value=new_user_entity):
-        with patch.object(new_user_entity, "to_model", return_value=new_user_data):
-            result = join_service.create_user(new_user_data)
-
-            assert result == new_user_data
-            mock_session.add.assert_called_once_with(new_user_entity)
-            mock_session.commit.assert_called_once()
-
-
-def test_get_user(mock_session: Mock):
-    join_service = JoinService(session=mock_session)
-
+def test_get_user(join_service: JoinService) -> None:
     user_id = 1
-    user_entity = UserEntity(
-        id=user_id,
-        first_name="Bob",
-        last_name="Jones",
-        email="bob@example.com",
-        major="Chemistry",
-    )
-    user_data = UserData(
-        id=user_id,
-        first_name="Bob",
-        last_name="Jones",
-        email="bob@example.com",
-        major="Chemistry",
-    )
+    user = join_service.get_user(user_id)
+    assert user.id == user_id
+    assert user.first_name == "user"
+    assert user.last_name == "user"
+    assert user.email == "root@unc.edu"
+    assert user.major == "math"
 
-    with patch.object(join_service, "get_user_by_id", return_value=user_entity):
-        with patch.object(user_entity, "to_model", return_value=user_data):
-            result = join_service.get_user(user_id)
+def test_create_user(join_service: JoinService) -> None:
+    user_data = UserData(id=2, first_name="Jane", last_name="Doe", email="jane.doe@example.com", major="Physics")
+    created_user = join_service.create_user(user_data)
+    assert created_user.email == user_data.email
 
-            assert result == user_data
+def test_create_user_existing_email(join_service: JoinService) -> None:
+    user_data = UserData(id=2, first_name="John", last_name="Doe", email="root@unc.edu", major="Physics")
+    with pytest.raises(UserRegistrationException):
+        join_service.create_user(user_data)
 
+def test_update_user(join_service: JoinService) -> None:
+    updated_data = UserData(id=1, first_name="Updated", last_name="User", email="root@unc.edu", major="Updated Major")
+    join_service.update_user(updated_data)
+    updated_user = join_service.get_user(1)
+    assert updated_user.first_name == "Updated"
+    assert updated_user.last_name == "User"
+    assert updated_user.major == "Updated Major"
 
-def test_update_user(mock_session: Mock):
-    join_service = JoinService(session=mock_session)
+def test_delete_user(join_service: JoinService) -> None:
+    join_service.delete_user(1)
+    with pytest.raises(ResourceNotFoundException):
+        join_service.get_user(1)
 
-    user_id = 2
-    updated_user_data = UserData(
-        id=user_id,
-        first_name="Charlie",
-        last_name="Brown",
-        email="charlie@example.com",
-        major="Mathematics",
-    )
-    user_entity = UserEntity(
-        id=user_id,
-        first_name="Charles",
-        last_name="Brown",
-        email="charlie@example.com",
-        major="Math",
-    )
+def test_get_user_by_id(join_service: JoinService) -> None:
+    user = join_service.get_user(1)
+    assert user.id == 1
+    assert user.first_name == "user"
+    assert user.last_name == "user"
+    assert user.email == "root@unc.edu"
+    assert user.major == "math"
 
-    with patch.object(join_service, "get_user_by_id", return_value=user_entity):
-        result = join_service.update_user(updated_user_data)
+def test_get_user_by_id_not_found(join_service: JoinService) -> None:
+    with pytest.raises(ResourceNotFoundException):
+        join_service.get_user(999)
 
-        assert result.first_name == updated_user_data.first_name
-        assert result.last_name == updated_user_data.last_name
-        assert result.major == updated_user_data.major
-        mock_session.commit.assert_called_once()
-
-def test_delete_user(mock_session: Mock):
-    join_service = JoinService(session=mock_session)
-
-    user_id = 3
-    user_entity = UserEntity(id=user_id, first_name="David", last_name="Green", email="david@example.com", major="Biology")
-
-    with patch.object(join_service, 'get_user_by_id', return_value=user_entity):
-        join_service.delete_user(user_id)
-
-        mock_session.delete.assert_called_once_with(user_entity)
-        mock_session.commit.assert_called_once()
+def test_check_email_registered(join_service: JoinService) -> None:
+    assert join_service.check_email_registered("root@unc.edu") is True
+    assert join_service.check_email_registered("nonexistent@example.com") is False

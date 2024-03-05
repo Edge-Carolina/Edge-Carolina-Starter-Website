@@ -19,15 +19,8 @@ class UserPermissionException(Exception):
         super().__init__(f"Not authorized to perform `{action}` on `{resource}`")
 
 
-class OrganizationNotFoundException(Exception):
-    """OrganizationNotFoundException is raised when trying to access an organization that does not exist."""
+class UserRegistrationException(Exception):
+    """EventRegistrationException is raised when a user attempts to register and cannot (i.e., when the email already exists)."""
 
-    def __init__(self, id: str):
-        super().__init__(f"No organization found matching slug/id: {id}")
-
-
-class EventRegistrationException(Exception):
-    """EventRegistrationException is raised when a user attempts to register and cannot (i.e., when the event is full)."""
-
-    def __init__(self, event_id: int):
-        super().__init__(f"Unable to register user for the event with id: {event_id}")
+    def __init__(self):
+        super().__init__(f"Unable to register user, email already is registered.")

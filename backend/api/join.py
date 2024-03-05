@@ -5,6 +5,7 @@ Productivity routes are used to create, retrieve, and update Pomodoro timers."""
 from fastapi import APIRouter, Depends
 
 from backend.models.user_data import UserData
+from backend.services.exceptions import UserRegistrationException
 from ..services.join import JoinService
 
 
@@ -116,3 +117,16 @@ def delete_user(
     """
 
     return join_service.delete_user(id)
+
+@api.get("/check-email/{email}", response_model=bool)
+def check_email_registered(email: str, join_service: JoinService = Depends()) -> bool:
+    """
+    Check if an email is already registered.
+
+    Parameters:
+        email: Email to check
+
+    Returns:
+        bool: True if email is registered, False otherwise
+    """
+    return join_service.check_email_registered(email)
