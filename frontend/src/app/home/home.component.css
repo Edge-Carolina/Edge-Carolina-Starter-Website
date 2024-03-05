@@ -1,6 +1,8 @@
 body {
   height: 1200px;
   background-color: #f0f0f0;
+  overflow-x: hidden;
+  /* Add this line */
 }
 
 .cover-image {
@@ -173,4 +175,18 @@ body {
   width: 300px;
   height: 300px;
   transform: translateX(300px) translateY(-100px);
+}
+
+@media (min-resolution: 300dpi) {
+
+  .hero-content {
+    display: none;
+  }
+}
+
+@media (max-resolution: 110dpi) {
+
+  .logo-bottom {
+    transform: translateX(500px);
+  }
 }

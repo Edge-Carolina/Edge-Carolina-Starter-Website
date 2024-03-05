@@ -1,92 +1,118 @@
 .navbar {
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(
-        to right,
-        #011b22bb, /* Start with transparent black */
-        #000000a1 /* End with semi-transparent black */
-      ) ;    
-    z-index: 1050;
-    height: 50px;
-    margin-left: auto;
-    backdrop-filter: blur(15px); /* Apply the blur effect */
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right,
+      hsla(193, 94%, 7%, 0.733),
+      /* Start with transparent black */
+      #000000a1
+      /* End with semi-transparent black */
+    );
+  z-index: 1050;
+  height: 50px;
+  margin-left: auto;
+  backdrop-filter: blur(15px);
+  /* Apply the blur effect */
 }
 
 .button-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transform: translateX(-300px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(-40px);
+  height: 50px;
 }
 
 .button {
-    color: #fff;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: 18px;
-    font-family: 'Arial', sans-serif;
-    letter-spacing: 1px;
-    padding: 10px 20px;
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    border: 1px solid transparent;
-    text-align: right;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 1px;
+  padding: 25px 20px;
+
+  /* No vertical padding, 20px horizontal padding */
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  text-align: right;
 }
+
 
 
 /* Hover effect for links */
 .button:hover {
-    color: #3be3d2; /* Color for hover state */
-    transform: translateY(-2px); /* Slight lift effect on hover */
+  color: #3be3d2;
+  /* Color for hover state */
+  transform: translateY(-2px);
+  /* Slight lift effect on hover */
 }
 
 /* Hover effect for links */
 .logo:hover {
-    transform: translateY(-2px); /* Slight lift effect on hover */
-    cursor: pointer;
+  transform: translateY(-2px);
+  /* Slight lift effect on hover */
+  cursor: pointer;
 }
 
 .logo {
-    margin-right: auto; /* Pushes the logo to the left */
-    height: 60px; /* Adjust the height as needed */
+  margin-right: auto;
+  /* Pushes the logo to the left */
+  height: 60px;
+  /* Adjust the height as needed */
 }
 
 .main {
-    position: relative;
-    min-height: 100vh;
-    background-color: #000000;
+  position: relative;
+  min-height: 100vh;
+  background-color: #000000;
 }
+
 .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
+  position: relative;
+  display: inline-block;
+}
+
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    transform: translateY(24px);
-  }
-  
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  border-radius: 10px;
+}
+
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
+  color: #012f5a;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  left: 50%;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 1px;
+}
+
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
-  }
- 
+  background-color: #3be3d2;
+  border-radius: 10px;
+}
+
 .dropdown:hover .dropdown-content,
 .dropdown-content:hover {
   display: block;
+}
+
+@media (min-resolution: 400dpi) {
+
+  .button-container .button,
+  .button-container .dropdown-content {
+    display: none;
+  }
 }
