@@ -19,12 +19,27 @@ __license__ = "MIT"
 
 root = UserData(
     id=1,
-    first_name="user",
-    last_name="user",
+    first_name="root",
+    last_name="root",
     email="root@unc.edu",
-    major="math",
+    major="math"
 )
 
+updated_root = UserData(
+    id=1,
+    first_name="updated",
+    last_name="updated",
+    email="root@unc.edu",
+    major="updated"
+)
+
+user = UserData(
+    id=2,
+    first_name="user",
+    last_name="user",
+    email="user@unc.edu",
+    major="phyics"
+)
 users = [root]
 
 

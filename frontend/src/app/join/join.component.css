@@ -66,3 +66,13 @@ body {
     opacity: 0.5;
     cursor: not-allowed;
   }  
+
+  .cover-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
