@@ -40,10 +40,10 @@ Once the Dev Container begins, open a terminal and complete the following:
    2. Type "Reload Window" and select the action "Developer: Reload Window"
    3. It's unclear why this step is necessary, but it seems to fix issues with plugins initializing on first build of a DevContainer.
 3. Create database and reset demo data:
-   1. First make sure that your external port 5433 is not allocated: if you have already cloned a repository from Edge Carolina that port is most likely allocated. If 5433 is allocated, follow these steps:
+   1. First make sure that your external port 5434 is not allocated: If 5434 is allocated, follow these steps:
       1. Navigate to the .devcontainer directory
       2. Open the docker-compose.yml file
-      3. Find where it says "Ports" and change "5433" to a port that is not allocated: possibly "5434".
+      3. Find where it says "Ports" and change "5434" to a port that is not allocated: possibly "5435".
       4. You should now be good to go to complete the next steps.
    2. `python3 -m backend.script.create_database`
    3. `python3 -m backend.script.reset_demo`
