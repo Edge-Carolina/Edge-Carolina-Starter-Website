@@ -8,14 +8,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 
 
 from .api import (
-    join,
     static_files,
-)
-
-from .services.exceptions import (
-    UserRegistrationException,
-    UserPermissionException,
-    ResourceNotFoundException,
 )
 
 __authors__ = ["Weston Voglesonger"]
@@ -32,7 +25,6 @@ app = FastAPI(
     version="0.0.1",
     description=description,
     openapi_tags=[
-        join.openapi_tags,
     ],
 )
 
@@ -41,7 +33,6 @@ app.add_middleware(GZipMiddleware)
 
 # Plugging in each of the router APIs
 feature_apis = [
-    join,
 ]
 
 for feature_api in feature_apis:
@@ -49,20 +40,3 @@ for feature_api in feature_apis:
 
 # Static file mount used for serving Angular front-end in production, as well as static assets
 app.mount("/", static_files.StaticFileMiddleware(directory=Path("./static")))
-
-
-# Add application-wide exception handling middleware for commonly encountered API Exceptions
-@app.exception_handler(UserPermissionException)
-def permission_exception_handler(request: Request, e: UserPermissionException):
-    return JSONResponse(status_code=403, content={"message": str(e)})
-
-
-@app.exception_handler(ResourceNotFoundException)
-def resource_not_found_exception_handler(
-    request: Request, e: ResourceNotFoundException
-):
-    return JSONResponse(status_code=404, content={"message": str(e)})
-
-@app.exception_handler(UserRegistrationException)
-def user_registration_exception_handler(request: Request, e: UserPermissionException):
-    return JSONResponse(status_code=405, content={"message": str(e)})

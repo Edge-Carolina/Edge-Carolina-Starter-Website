@@ -14,18 +14,10 @@ import { MatListModule } from "@angular/material/list";
 
 // Components
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home/home.component";
-import { AboutComponent } from "./about/about.component";
-import { NavigationComponent } from "./navigation/navigation.component";
-import { JoinComponent } from "./join/join.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AboutComponent,
-    NavigationComponent,
-    JoinComponent,
     // Add other component declarations here
   ],
   imports: [
