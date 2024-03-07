@@ -4,9 +4,8 @@ Welcome to the official repository for the Edge Carolina website. At Edge Caroli
 
 # Getting Started
 
-The first thing you need to do when starting a new web application using the Edge Carolina Starter Website is import this repository into your own repository. This will then allow you to set up your repository however you want. Once that is done, you can do whatever you want!
+The first thing you need to do when starting a new web application using the Edge Carolina Starter Website is to create a new repository and add this repository as a template. This will import all of the files from this repository into your own repository with a clean commit history. Once you've done this you are free to modify it to your liking!
 
-** Just make sure you don't push anything into this repository!
 
 * [Get Started with a Development Environment](docs/get_started.md)
 
