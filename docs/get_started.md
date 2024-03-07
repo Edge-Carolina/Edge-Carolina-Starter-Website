@@ -40,8 +40,13 @@ Once the Dev Container begins, open a terminal and complete the following:
    2. Type "Reload Window" and select the action "Developer: Reload Window"
    3. It's unclear why this step is necessary, but it seems to fix issues with plugins initializing on first build of a DevContainer.
 3. Create database and reset demo data:
-   1. `python3 -m backend.script.create_database`
-   2. `python3 -m backend.script.reset_demo`
+   1. First make sure that your external port 5433 is not allocated: if you have already cloned a repository from Edge Carolina that port is most likely allocated. If 5433 is allocated, follow these steps:
+      a. Navigate to the .devcontainer directory
+      b. Open the docker-compose.yml file
+      c. Find where it says "Ports" and change "5433" to a port that is not allocated: possibly "5434".
+      d. You should now be good to go to complete the next steps.
+   2. `python3 -m backend.script.create_database`
+   3. `python3 -m backend.script.reset_demo`
 4. Start dev server processes using the `honcho` process manager
    1. `honcho start`
       1. Wait until you see "frontend.1 | Compiled successfully" emitted from the Angular dev server.
