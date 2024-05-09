@@ -1,6 +1,6 @@
 # Edge Carolina
 
-Welcome to the official repository for the Edge Carolina website. At Edge Carolina, we are dedicated to fostering a community of innovation and collaboration. Our mission is to inspire and support our members as they work in teams to develop groundbreaking products and technologies. By nurturing a diverse network of talented individuals, we aim to cultivate a vibrant ecosystem of exceptional thinkers and innovators.
+Welcome to the official repository for the Edge Carolina Starter website. At Edge Carolina, we are dedicated to fostering a community of innovation and collaboration. Our mission is to inspire and support our members as they work in teams to develop groundbreaking products and technologies. By nurturing a diverse network of talented individuals, we aim to cultivate a vibrant ecosystem of exceptional thinkers and innovators.
 
 # Getting Started
 
